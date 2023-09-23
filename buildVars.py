@@ -46,9 +46,9 @@ The add-on requires Voicemeeter to be installed."""
     # Do not change unless you know what you are doing!
     "addon_updateChannel": "dev",
     # Add-on license such as GPL 2
-    "addon_license": None,
+    "addon_license": "GPL 2",
     # URL for the license document the ad-on is licensed under
-    "addon_licenseURL": None,
+    "addon_licenseURL": "https://github.com/onyx-and-iris/nvda-addon-voicemeeter/blob/main/LICENSE",
 }
 
 # Define the python files that are the sources of your add-on.
