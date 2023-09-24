@@ -1,51 +1,41 @@
 import ctypes as ct
-import winreg
-from pathlib import Path
+from ctypes.wintypes import CHAR, FLOAT, LONG
 
-from .error import VMError
+from .cdll import libc
+from .error import VMCAPIError
 
 
 class Binds:
-    VM_KEY = "VB:Voicemeeter {17359A74-1236-5467}"
-    BITS = 64 if ct.sizeof(ct.c_voidp) == 8 else 32
+    bind_login = libc.VBVMR_Login
+    bind_login.restype = LONG
+    bind_login.argtypes = None
 
-    def __init__(self):
-        dll_path = Path(self.__vmpath()).parent.joinpath(
-            f'VoicemeeterRemote{"64" if self.BITS == 64 else ""}.dll'
-        )
-        if self.BITS == 64:
-            self.libc = ct.CDLL(str(dll_path))
-        else:
-            self.libc = ct.WinDLL(str(dll_path))
+    bind_logout = libc.VBVMR_Logout
+    bind_logout.restype = LONG
+    bind_logout.argtypes = None
 
-    def __vmpath(self):
-        with winreg.OpenKey(
-            winreg.HKEY_LOCAL_MACHINE,
-            r"{}".format(
-                "\\".join(
-                    (
-                        "\\".join(
-                            filter(
-                                None,
-                                (
-                                    "SOFTWARE",
-                                    "WOW6432Node" if self.BITS == 64 else "",
-                                    "Microsoft",
-                                    "Windows",
-                                    "CurrentVersion",
-                                    "Uninstall",
-                                ),
-                            )
-                        ),
-                        self.VM_KEY,
-                    )
-                )
-            ),
-        ) as vm_key:
-            return winreg.QueryValueEx(vm_key, r"UninstallString")[0]
+    bind_run_voicemeeter = libc.VBVMR_RunVoicemeeter
+    bind_run_voicemeeter.restype = LONG
+    bind_run_voicemeeter.argtypes = [LONG]
+
+    bind_get_voicemeeter_type = libc.VBVMR_GetVoicemeeterType
+    bind_get_voicemeeter_type.restype = LONG
+    bind_get_voicemeeter_type.argtypes = [ct.POINTER(LONG)]
+
+    bind_is_parameters_dirty = libc.VBVMR_IsParametersDirty
+    bind_is_parameters_dirty.restype = LONG
+    bind_is_parameters_dirty.argtypes = None
+
+    bind_get_parameter_float = libc.VBVMR_GetParameterFloat
+    bind_get_parameter_float.restype = LONG
+    bind_get_parameter_float.argtypes = [ct.POINTER(CHAR), ct.POINTER(FLOAT)]
+
+    bind_set_parameter_float = libc.VBVMR_SetParameterFloat
+    bind_set_parameter_float.restype = LONG
+    bind_set_parameter_float.argtypes = [ct.POINTER(CHAR), FLOAT]
 
     def call(self, fn, *args, ok=(0,)):
-        retval = getattr(self.libc, fn)(*args)
+        retval = fn(*args)
         if retval not in ok:
-            raise VMError(f"{fn} returned {retval}")
+            raise VMCAPIError(fn.bind_namebind_, retval)
         return retval
