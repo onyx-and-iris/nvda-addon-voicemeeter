@@ -4,6 +4,8 @@ Control Voicemeeter GUI with customisable hotkeys.
 
 ## Keybinds
 
+### Controllers
+
 - `NVDA+alt+s`: Enable strip mode
 - `NVDA+alt+b`: Enable bus mode.
 
@@ -16,11 +18,15 @@ Control Voicemeeter GUI with customisable hotkeys.
 - `NVDA+alt+7`: Enable controller for channel 7 (strip|bus)
 - `NVDA+alt+8`: Enable controller for channel 8 (strip|bus)
 
+### Slider Modes
+
 - `NVDA+alt+g`: Enable gain slider mode.
 - `NVDA+alt+c`: Enable comp slider mode.
 - `NVDA+alt+t`: Enable gate sldier mode.
 - `NVDA+alt+d`: Enable denoiser slider mode.
 - `NVDA+alt+a`: Enable audibility slider mode.
+
+### Sliders
 
 - `NVDA+shift+upArrow`: Move slider up by 1 step
 - `NVDA+shift+downArrow`: Move slider down by 1 step
@@ -29,11 +35,15 @@ Control Voicemeeter GUI with customisable hotkeys.
 - `NVDA+shift+control+upArrow`: Move slider up by 3 steps
 - `NVDA+shift+control+downArrow`: Move slider down by 3 steps
 
+### Channel Parameters
+
 - `NVDA+shift+o`: Mono
 - `NVDA+shift+s`: Solo
 - `NVDA+shift+m`: Mute
 - `NVDA+shift+c`: MC
 - `NVDA+shift+k`: Karaoke
+
+### Announcements
 
 - `NVDA+shift+q`: Announce current controller.
 - `NVDA+shift+a`: Announce Voicemeeter kind.
