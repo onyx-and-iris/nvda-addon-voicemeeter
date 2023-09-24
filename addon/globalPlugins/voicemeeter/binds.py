@@ -37,5 +37,5 @@ class Binds:
     def call(self, fn, *args, ok=(0,)):
         retval = fn(*args)
         if retval not in ok:
-            raise VMCAPIError(fn.bind_namebind_, retval)
+            raise VMCAPIError(fn.__name__, retval)
         return retval
