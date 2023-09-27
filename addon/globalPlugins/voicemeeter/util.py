@@ -1,4 +1,4 @@
-from . import config, util
+from . import config
 from .kinds import request_kind_map
 
 
@@ -44,7 +44,7 @@ def _make_gestures(kind_id):
         defaults[f"kb:NVDA+shift+{i}"] = "bus_assignment"
     abc = config.get("keybinds")
     if abc:
-        overrides = {f"kb:{util.remove_prefix(k, 'kb:')}": v for k, v in abc.items()}
+        overrides = {f"kb:{remove_prefix(k, 'kb:')}": v for k, v in abc.items()}
         matching_values = set(defaults.values()).intersection(set(overrides.values()))
         defaults = {k: v for k, v in defaults.items() if v not in matching_values}
         return {**defaults, **overrides}
