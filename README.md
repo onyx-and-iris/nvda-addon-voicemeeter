@@ -4,9 +4,9 @@ Control Voicemeeter with global hotkeys.
 
 ## Install
 
-This addon can be installed through the Add-on store, `Install from external source`. Simply download the latest Release and load it with NVDA.
+This addon can be installed through the Add-on store, `Install from external source`. Simply download the [latest Release](https://github.com/onyx-and-iris/nvda-addon-voicemeeter/releases) and load it with NVDA.
 
-## Keybinds
+## Default Keybinds
 
 ### Controllers
 
@@ -51,3 +51,44 @@ This addon can be installed through the Add-on store, `Install from external sou
 
 - `NVDA+shift+q`: Announce current controller.
 - `NVDA+shift+a`: Announce Voicemeeter kind.
+
+## Configuration
+
+By placing a file named `nvda_settings.json` in `User Home Directory / Documents / Voicemeeter` (the same place as your Voicemeeter xml profiles) you can change most of the default keybinds.
+
+example:
+
+```json
+{
+  "voicemeeter": "banana",
+  "keybinds": {
+    "NVDA+alt+k": "strip_mode",
+    "NVDA+alt+l": "bus_mode",
+    "NVDA+alt+g": "gain_mode",
+    "NVDA+alt+c": "comp_mode",
+    "NVDA+alt+t": "gate_mode",
+    "NVDA+alt+d": "denoiser_mode",
+    "NVDA+alt+a": "audibility_mode",
+    "NVDA+shift+q": "announce_controller",
+    "NVDA+shift+z": "announce_voicemeeter_version",
+    "NVDA+shift+s": "toggle_solo",
+    "NVDA+shift+m": "toggle_mute",
+    "NVDA+shift+c": "toggle_mc",
+    "NVDA+shift+k": "karaoke",
+    "NVDA+shift+upArrow": "slider_increase_by_point_one",
+    "NVDA+shift+downArrow": "slider_decrease_by_point_one",
+    "NVDA+shift+alt+upArrow": "slider_increase_by_one",
+    "NVDA+shift+alt+downArrow": "slider_decrease_by_one",
+    "NVDA+shift+control+upArrow": "slider_increase_by_three",
+    "NVDA+shift+control+downArrow": "slider_decrease_by_three"
+  }
+}
+```
+
+Would make the following changes:
+
+- load the plugin in `banana` mode (default is potato).
+- change the `strip_mode` and `bus_mode` binds to k and l respectively.
+- change the `announce_voicemeeter_version` bind to z.
+
+All other binds would then be defaults.
