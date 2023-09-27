@@ -27,6 +27,17 @@ class Controller(Binds):
         self.call(self.bind_get_voicemeeter_type, ct.byref(c_type))
         return KindId(c_type.value).name.lower()
 
+    @property
+    def version(self):
+        ver = ct.c_long()
+        self.call(self.bind_get_voicemeeter_version, ct.byref(ver))
+        return "{}.{}.{}.{}".format(
+            (ver.value & 0xFF000000) >> 24,
+            (ver.value & 0x00FF0000) >> 16,
+            (ver.value & 0x0000FF00) >> 8,
+            ver.value & 0x000000FF,
+        )
+
     def run_voicemeeter(self, kind_id):
         val = kind_id.value
         if val == 3 and BITS == 64:

@@ -8,7 +8,7 @@ class CommandsMixin:
     ### ANNOUNCEMENTS ###
 
     def script_announce_voicemeeter_version(self, _):
-        ui.message(f"Running Voicemeeter {self.kind}")
+        ui.message(f"Running Voicemeeter {self.kind} {self.controller.version}")
 
     def script_announce_controller(self, _):
         ui.message(f"Controller for {self.controller.ctx.strategy} {self.controller.ctx.index + 1}")

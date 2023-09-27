@@ -14,11 +14,11 @@ def _make_gestures():
     defaults = {
         "kb:NVDA+alt+s": "strip_mode",
         "kb:NVDA+alt+b": "bus_mode",
-        "kb:NVDA+alt+g": "slider_mode",
-        "kb:NVDA+alt+c": "slider_mode",
-        "kb:NVDA+alt+t": "slider_mode",
-        "kb:NVDA+alt+d": "slider_mode",
-        "kb:NVDA+alt+a": "slider_mode",
+        "kb:NVDA+alt+g": "slider_mode",  # Gate
+        "kb:NVDA+alt+c": "slider_mode",  # Comp
+        "kb:NVDA+alt+t": "slider_mode",  # Gate
+        "kb:NVDA+alt+d": "slider_mode",  # Denoiser
+        "kb:NVDA+alt+a": "slider_mode",  # Audibility
         "kb:NVDA+shift+q": "announce_controller",
         "kb:NVDA+shift+a": "announce_voicemeeter_version",
         "kb:NVDA+shift+o": "toggle_mono",

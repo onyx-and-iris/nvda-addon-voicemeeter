@@ -22,6 +22,10 @@ class Binds:
     bind_get_voicemeeter_type.restype = LONG
     bind_get_voicemeeter_type.argtypes = [ct.POINTER(LONG)]
 
+    bind_get_voicemeeter_version = libc.VBVMR_GetVoicemeeterVersion
+    bind_get_voicemeeter_version.restype = LONG
+    bind_get_voicemeeter_version.argtypes = [ct.POINTER(LONG)]
+
     bind_is_parameters_dirty = libc.VBVMR_IsParametersDirty
     bind_is_parameters_dirty.restype = LONG
     bind_is_parameters_dirty.argtypes = None
