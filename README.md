@@ -56,6 +56,12 @@ This addon can be installed through the Add-on store, `Install from external sou
 
 By placing a file named `nvda_settings.json` in `User Home Directory / Documents / Voicemeeter` (the same place as your Voicemeeter xml profiles) you can change most of the default keybinds.
 
+The `voicemeeter` key can take one of three values:
+
+- `basic`
+- `banana`
+- `potato`
+
 example:
 
 ```json
