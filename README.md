@@ -1,6 +1,6 @@
 # NVDA Addon Voicemeeter
 
-Control Voicemeeter GUI with customisable hotkeys.
+Control Voicemeeter GUI with global hotkeys.
 
 ## Keybinds
 
@@ -22,7 +22,7 @@ Control Voicemeeter GUI with customisable hotkeys.
 
 - `NVDA+alt+g`: Enable gain slider mode.
 - `NVDA+alt+c`: Enable comp slider mode.
-- `NVDA+alt+t`: Enable gate sldier mode.
+- `NVDA+alt+t`: Enable gate slider mode.
 - `NVDA+alt+d`: Enable denoiser slider mode.
 - `NVDA+alt+a`: Enable audibility slider mode.
 
