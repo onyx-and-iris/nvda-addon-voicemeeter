@@ -47,6 +47,17 @@ This addon can be installed through the Add-on store, `Install from external sou
 - `NVDA+shift+c`: MC
 - `NVDA+shift+k`: Karaoke
 
+### Bus Assignments (A1-A5|B1-B3)
+
+- `NVDA+shift+1`: Toggle BUS assignment 1 for a strip
+- `NVDA+shift+2`: Toggle BUS assignment 2 for a strip
+- `NVDA+shift+3`: Toggle BUS assignment 3 for a strip
+- `NVDA+shift+4`: Toggle BUS assignment 4 for a strip
+- `NVDA+shift+5`: Toggle BUS assignment 5 for a strip
+- `NVDA+shift+6`: Toggle BUS assignment 6 for a strip
+- `NVDA+shift+7`: Toggle BUS assignment 7 for a strip
+- `NVDA+shift+8`: Toggle BUS assignment 8 for a strip
+
 ### Announcements
 
 - `NVDA+shift+q`: Announce current controller.
