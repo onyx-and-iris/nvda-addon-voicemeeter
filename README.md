@@ -97,15 +97,24 @@ example:
     "NVDA+shift+alt+upArrow": "slider_increase_by_one",
     "NVDA+shift+alt+downArrow": "slider_decrease_by_one",
     "NVDA+shift+control+upArrow": "slider_increase_by_three",
-    "NVDA+shift+control+downArrow": "slider_decrease_by_three"
+    "NVDA+shift+control+downArrow": "slider_decrease_by_three",
+    "NVDA+control+1": "bus_assignment",
+    "NVDA+control+2": "bus_assignment",
+    "NVDA+control+3": "bus_assignment",
+    "NVDA+control+4": "bus_assignment",
+    "NVDA+control+5": "bus_assignment",
+    "NVDA+control+6": "bus_assignment",
+    "NVDA+control+7": "bus_assignment",
+    "NVDA+control+8": "bus_assignment"
   }
 }
 ```
 
 Would make the following changes:
 
-- load the plugin in `banana` mode (default is potato).
-- change the `strip_mode` and `bus_mode` binds to k and l respectively.
-- change the `announce_voicemeeter_version` bind to z.
+- load the plugin in `banana` mode (default is potato)
+- change the `strip_mode` and `bus_mode` binds to `NVDA+alt+k` and `NVDA+alt+l` respectively
+- change the `announce_voicemeeter_version` bind to `NVDA+shift+z`
+- changes the bus assignment binds to `NVDA+control+number`
 
 All other binds would then be defaults.
