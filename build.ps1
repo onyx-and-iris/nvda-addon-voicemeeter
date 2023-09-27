@@ -4,8 +4,8 @@ param(
 
 function Copy-FilestoScratchpad {
     $source = Join-Path $PSScriptRoot "addon" "globalPlugins" "voicemeeter"
-    $target = Join-Path $env:appdata "nvda" "scratchpad" "globalPlugins"
-    Copy-Item -Path $source -Destination $target -Recurse -Force
+    $target = Join-Path $env:appdata "nvda" "scratchpad" "globalPlugins" "voicemeeter"
+    Robocopy $source $target /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 }
 
 function main {
