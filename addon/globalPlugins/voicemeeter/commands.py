@@ -1,7 +1,7 @@
 import ui
 from logHandler import log
 
-from . import context, util
+from . import context
 
 
 class CommandsMixin:
@@ -37,18 +37,24 @@ class CommandsMixin:
         ui.message(f"Controller for {self.controller.ctx.strategy} {self.controller.ctx.index + 1}")
         log.info(f"INFO - {self.controller.ctx.strategy} {self.controller.ctx.index} mode")
 
-    def script_slider_mode(self, gesture):
-        if gesture.displayName.endswith("g"):
-            self.controller.ctx.slider_mode = "gain"
-        elif gesture.displayName.endswith("c"):
-            self.controller.ctx.slider_mode = "comp"
-        elif gesture.displayName.endswith("t"):
-            self.controller.ctx.slider_mode = "gate"
-        elif gesture.displayName.endswith("d"):
-            self.controller.ctx.slider_mode = "denoiser"
-        elif gesture.displayName.endswith("a"):
-            self.controller.ctx.slider_mode = "audibility"
-        ui.message(f"{self.controller.ctx.slider_mode} mode enabled")
+    def __set_slider_mode(self, mode):
+        self.controller.ctx.slider_mode = mode
+        ui.message(f"{mode} mode enabled")
+
+    def script_gain_mode(self, _):
+        self.__set_slider_mode("gain")
+
+    def script_comp_mode(self, _):
+        self.__set_slider_mode("comp")
+
+    def script_gate_mode(self, _):
+        self.__set_slider_mode("gate")
+
+    def script_denoiser_mode(self, _):
+        self.__set_slider_mode("denoiser")
+
+    def script_audibility_mode(self, _):
+        self.__set_slider_mode("audibility")
 
     ### BOOLEAN PARAMETERS ###
 
@@ -89,28 +95,34 @@ class CommandsMixin:
         self.controller.ctx.set_bool(output, val)
         ui.message("on" if val else "off")
 
-    ### SLIDER MODES ###
+    ### CONTROL SLIDERS ###
 
-    def script_slider_increase(self, gesture):
-        op = util.remove_prefix(gesture.displayName, "kb:NVDA+shift+")
-        if op.startswith("alt"):
-            offset = 0.1
-        elif op.startswith("ctrl"):
-            offset = 3
-        else:
-            offset = 1
-        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + offset
+    def script_slider_increase_by_point_one(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 0.1
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_decrease(self, gesture):
-        op = util.remove_prefix(gesture.displayName, "kb:NVDA+shift+")
-        if op.startswith("alt"):
-            offset = 0.1
-        elif op.startswith("ctrl"):
-            offset = 3
-        else:
-            offset = 1
-        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - offset
+    def script_slider_decrease_by_point_one(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 0.1
+        self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
+        ui.message(str(round(val, 1)))
+
+    def script_slider_increase_by_one(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 1
+        self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
+        ui.message(str(round(val, 1)))
+
+    def script_slider_decrease_by_one(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 1
+        self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
+        ui.message(str(round(val, 1)))
+
+    def script_slider_increase_by_three(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 3
+        self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
+        ui.message(str(round(val, 1)))
+
+    def script_slider_decrease_by_three(self, gesture):
+        val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 3
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
