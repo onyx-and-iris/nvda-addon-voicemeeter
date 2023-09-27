@@ -41,7 +41,7 @@ def _make_gestures(kind_id):
     for i in range(1, kind.num_strip + 1):
         defaults[f"kb:NVDA+alt+{i}"] = "index"
     for i in range(1, kind.phys_out + kind.virt_out + 1):
-        defaults[f"kb:NVDA+alt+{i}"] = "bus_assignment"
+        defaults[f"kb:NVDA+shift+{i}"] = "bus_assignment"
     abc = config.get("keybinds")
     if abc:
         overrides = {f"kb:{util.remove_prefix(k, 'kb:')}": v for k, v in abc.items()}
