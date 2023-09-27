@@ -35,7 +35,7 @@ def get_vmpath():
 try:
     vm_parent = Path(get_vmpath()).parent
 except FileNotFoundError as e:
-    raise VMError(f"Unable to fetch DLL path from the registry") from e
+    raise VMError("Unable to fetch DLL path from the registry") from e
 
 DLL_NAME = f'VoicemeeterRemote{"64" if BITS == 64 else ""}.dll'
 

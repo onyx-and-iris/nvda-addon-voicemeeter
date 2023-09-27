@@ -1,5 +1,5 @@
 class VMError(Exception):
-    """Base voicemeeterlib exception class."""
+    """Base voicemeeterlib exception class"""
 
 
 class VMCAPIError(VMError):

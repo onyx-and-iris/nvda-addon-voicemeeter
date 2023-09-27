@@ -8,12 +8,8 @@ class Strategy(ABC):
         self._slider_mode = "gain"
 
     @abstractmethod
-    def __str__(self):
-        pass
-
-    @property
     def identifier(self):
-        return f"{self}[{self._index}]"
+        pass
 
     @property
     def index(self):
@@ -54,10 +50,18 @@ class StripStrategy(Strategy):
     def __str__(self):
         return "Strip"
 
+    @property
+    def identifier(self):
+        return f"{self}[{self._index}]"
+
 
 class BusStrategy(Strategy):
     def __str__(self):
         return "Bus"
+
+    @property
+    def identifier(self):
+        return f"{self}[{self._index}]"
 
 
 class Context:
