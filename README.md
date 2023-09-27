@@ -1,6 +1,10 @@
 # NVDA Addon Voicemeeter
 
-Control Voicemeeter GUI with global hotkeys.
+Control Voicemeeter with global hotkeys.
+
+## Install
+
+This addon can be installed through the Add-on store, `Install from external source`. Simply download the latest Release and load it with NVDA.
 
 ## Keybinds
 
