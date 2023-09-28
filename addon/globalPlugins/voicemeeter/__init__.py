@@ -8,7 +8,7 @@ from .controller import Controller
 from .kinds import KindId, request_kind_map
 
 
-class GlobalPlugin(globalPluginHandler.GlobalPlugin, CommandsMixin):
+class GlobalPlugin(CommandsMixin, globalPluginHandler.GlobalPlugin):
     __kind_id = config.get("voicemeeter", "potato")
     __gestures = util._make_gestures(__kind_id)
 
