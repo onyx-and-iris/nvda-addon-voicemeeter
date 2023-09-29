@@ -79,11 +79,12 @@ class CommandsMixin:
         ui.message("on" if val else "off")
 
     def script_karaoke(self, _):
+        opts = ["off", "k m", "k 1", "k 2", "k v"]
         val = self.controller.ctx.get_int("karaoke") + 1
-        if val == 5:
+        if val == len(opts):
             val = 0
         self.controller.ctx.set_int("karaoke", val)
-        ui.message(val)
+        ui.message(opts[val])
 
     def script_bus_assignment(self, gesture):
         proposed = int(gesture.displayName[-1])
