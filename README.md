@@ -128,3 +128,4 @@ Would make the following changes:
 All other binds would then be defaults.
 
 [voicemeeter]: https://voicemeeter.com/
+[nvda]: https://www.nvaccess.org/
