@@ -16,39 +16,39 @@ def _(arg):
 # Add-on information variables
 addon_info = {
     # add-on Name/identifier, internal for NVDA
-    "addon_name": "voicemeeter",
+    'addon_name': 'voicemeeter',
     # Add-on summary, usually the user visible name of the addon.
     # Translators: Summary for this add-on
     # to be shown on installation and add-on information found in Add-ons Manager.
-    "addon_summary": _("Voicemeeter Controller"),
+    'addon_summary': _('Voicemeeter Controller'),
     # Add-on description
     # Translators: Long description to be shown for this add-on on add-on information from add-ons manager
-    "addon_description": _(
+    'addon_description': _(
         """This add-on uses Voicemeeter's Remote API to control it's GUI.
 The add-on requires Voicemeeter to be installed."""
     ),
     # version
-    "addon_version": "0.6",
+    'addon_version': '1.0.0',
     # Author(s)
-    "addon_author": "onyx-and-iris <code@onyxandiris.online>",
+    'addon_author': 'onyx-and-iris <code@onyxandiris.online>',
     # URL for the add-on documentation support
-    "addon_url": None,
+    'addon_url': None,
     # URL for the add-on repository where the source code can be found
-    "addon_sourceURL": "https://github.com/onyx-and-iris/nvda-addon-voicemeeter",
+    'addon_sourceURL': 'https://github.com/onyx-and-iris/nvda-addon-voicemeeter',
     # Documentation file name
-    "addon_docFileName": "readme.html",
+    'addon_docFileName': 'readme.html',
     # Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)
-    "addon_minimumNVDAVersion": "2023.2",
+    'addon_minimumNVDAVersion': '2024.4.0',
     # Last NVDA version supported/tested (e.g. "2018.4.0", ideally more recent than minimum version)
-    "addon_lastTestedNVDAVersion": "2023.2",
+    'addon_lastTestedNVDAVersion': '2024.4.2',
     # Add-on update channel (default is None, denoting stable releases,
     # and for development releases, use "dev".)
     # Do not change unless you know what you are doing!
-    "addon_updateChannel": "dev",
+    'addon_updateChannel': 'dev',
     # Add-on license such as GPL 2
-    "addon_license": "GPL 2",
+    'addon_license': 'GPL 2',
     # URL for the license document the ad-on is licensed under
-    "addon_licenseURL": "https://github.com/onyx-and-iris/nvda-addon-voicemeeter/blob/main/LICENSE",
+    'addon_licenseURL': 'https://github.com/onyx-and-iris/nvda-addon-voicemeeter/blob/main/LICENSE',
 }
 
 # Define the python files that are the sources of your add-on.
@@ -60,11 +60,11 @@ The add-on requires Voicemeeter to be installed."""
 # For more information on SCons Glob expressions please take a look at:
 # https://scons.org/doc/production/HTML/scons-user/apd.html
 pythonSources = [
-    "addon/globalPlugins/voicemeeter/*.py",
+    'addon/globalPlugins/voicemeeter/*.py',
 ]
 
 # Files that contain strings for translation. Usually your python sources
-i18nSources = pythonSources + ["buildVars.py"]
+i18nSources = pythonSources + ['buildVars.py']
 
 # Files that will be ignored when building the nvda-addon file
 # Paths are relative to the addon directory, not to the root directory of your addon sources.
@@ -73,7 +73,7 @@ excludedFiles = []
 # Base language for the NVDA add-on
 # If your add-on is written in a language other than english, modify this variable.
 # For example, set baseLanguage to "es" if your add-on is primarily written in spanish.
-baseLanguage = "en"
+baseLanguage = 'en'
 
 # Markdown extensions for add-on documentation
 # Most add-ons do not require additional Markdown extensions.

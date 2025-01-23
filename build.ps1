@@ -1,25 +1,25 @@
-param(
+param (
     [switch]$build
 )
 
-function Copy-FilestoScratchpad {
+function Copy-FilesToScratchpad {
     $source = Join-Path $PSScriptRoot "addon" "globalPlugins" "voicemeeter"
     $target = Join-Path $env:appdata "nvda" "scratchpad" "globalPlugins" "voicemeeter"
     Robocopy $source $target | Out-Null
 }
 
-function main {
-    "Copying files to Scratchpad" | Write-Host
-    Copy-FilestoScratchpad
+function Build-Addon {
+    "Building add-on" | Write-Host
+    scons
+}
+
+function Main {
+    "Copying updated files to Scratchpad" | Write-Host
+    Copy-FilesToScratchpad
 
     if ($build) {
-        Invoke-Expression ".venv/Scripts/Activate.ps1"
-
-        "Building add-on" | Write-Host
-        scons
-
-        deactivate
+        Build-Addon
     }
 }
 
-if ($MyInvocation.InvocationName -ne '.') { main }
+if ($MyInvocation.InvocationName -ne '.') { Main }
