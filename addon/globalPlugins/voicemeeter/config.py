@@ -3,10 +3,10 @@ from pathlib import Path
 
 
 def config_from_json():
-    pn = Path.home() / "Documents" / "Voicemeeter" / "nvda_settings.json"
+    pn = Path.home() / 'Documents' / 'Voicemeeter' / 'nvda_settings.json'
     data = None
     if pn.exists():
-        with open(pn, "r") as f:
+        with open(pn, 'r') as f:
             data = json.load(f)
     return data or {}
 

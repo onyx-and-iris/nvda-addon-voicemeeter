@@ -5,7 +5,7 @@ class Strategy(ABC):
     def __init__(self, controller, index):
         self._controller = controller
         self._index = index
-        self._slider_mode = "gain"
+        self._slider_mode = 'gain'
 
     @abstractmethod
     def identifier(self):
@@ -28,40 +28,40 @@ class Strategy(ABC):
         self._slider_mode = val
 
     def get_bool(self, param: str) -> bool:
-        return self._controller._get(f"{self.identifier}.{param}") == 1
+        return self._controller._get(f'{self.identifier}.{param}') == 1
 
     def set_bool(self, param: str, val: bool):
-        self._controller._set(f"{self.identifier}.{param}", 1 if val else 0)
+        self._controller._set(f'{self.identifier}.{param}', 1 if val else 0)
 
     def get_float(self, param: str) -> float:
-        return round(self._controller._get(f"{self.identifier}.{param}"), 1)
+        return round(self._controller._get(f'{self.identifier}.{param}'), 1)
 
     def set_float(self, param: str, val: float):
-        self._controller._set(f"{self.identifier}.{param}", val)
+        self._controller._set(f'{self.identifier}.{param}', val)
 
     def get_int(self, param: str) -> int:
-        return int(self._controller._get(f"{self.identifier}.{param}"))
+        return int(self._controller._get(f'{self.identifier}.{param}'))
 
     def set_int(self, param: str, val: int):
-        self._controller._set(f"{self.identifier}.{param}", val)
+        self._controller._set(f'{self.identifier}.{param}', val)
 
 
 class StripStrategy(Strategy):
     def __str__(self):
-        return "Strip"
+        return 'Strip'
 
     @property
     def identifier(self):
-        return f"{self}[{self._index}]"
+        return f'{self}[{self._index}]'
 
 
 class BusStrategy(Strategy):
     def __str__(self):
-        return "Bus"
+        return 'Bus'
 
     @property
     def identifier(self):
-        return f"{self}[{self._index}]"
+        return f'{self}[{self._index}]'
 
 
 class Context:

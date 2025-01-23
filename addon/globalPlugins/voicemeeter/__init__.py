@@ -9,7 +9,7 @@ from .kinds import KindId, request_kind_map
 
 
 class GlobalPlugin(CommandsMixin, globalPluginHandler.GlobalPlugin):
-    __kind_id = config.get("voicemeeter", "potato")
+    __kind_id = config.get('voicemeeter', 'potato')
     __gestures = util._make_gestures(__kind_id)
 
     def __init__(self, *args, **kwargs):

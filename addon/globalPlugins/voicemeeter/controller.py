@@ -14,12 +14,12 @@ class Controller(Binds):
 
     def login(self):
         retval = self.call(self.bind_login, ok=(0, 1))
-        log.info("INFO - logged into Voicemeeter Remote API")
+        log.info('INFO - logged into Voicemeeter Remote API')
         return retval
 
     def logout(self):
         self.call(self.bind_logout)
-        log.info("NFO - logged out of Voicemeeter Remote API")
+        log.info('NFO - logged out of Voicemeeter Remote API')
 
     @property
     def kind_id(self):
@@ -31,7 +31,7 @@ class Controller(Binds):
     def version(self):
         ver = ct.c_long()
         self.call(self.bind_get_voicemeeter_version, ct.byref(ver))
-        return "{}.{}.{}.{}".format(
+        return '{}.{}.{}.{}'.format(
             (ver.value & 0xFF000000) >> 24,
             (ver.value & 0x00FF0000) >> 16,
             (ver.value & 0x0000FF00) >> 8,

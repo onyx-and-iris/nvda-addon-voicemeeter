@@ -79,14 +79,14 @@ class PotatoMap(KindMapClass):
 
 
 def kind_factory(kind_id):
-    if kind_id == "basic":
+    if kind_id == 'basic':
         _kind_map = BasicMap
-    elif kind_id == "banana":
+    elif kind_id == 'banana':
         _kind_map = BananaMap
-    elif kind_id == "potato":
+    elif kind_id == 'potato':
         _kind_map = PotatoMap
     else:
-        raise ValueError(f"Unknown Voicemeeter kind {kind_id}")
+        raise ValueError(f'Unknown Voicemeeter kind {kind_id}')
     return _kind_map(name=kind_id)
 
 
