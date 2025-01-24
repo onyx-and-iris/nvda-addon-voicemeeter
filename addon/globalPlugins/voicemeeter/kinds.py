@@ -14,11 +14,6 @@ class KindId(Enum):
 @dataclass
 class KindMapClass:
     name: str
-    ins: tuple
-    outs: tuple
-    vban: tuple
-    asio: tuple
-    insert: int
 
     @property
     def phys_in(self) -> int:
@@ -50,7 +45,6 @@ class KindMapClass:
 
 @dataclass
 class BasicMap(KindMapClass):
-    name: str
     ins: tuple = (2, 1)
     outs: tuple = (1, 1)
     vban: tuple = (4, 4, 1, 1)
@@ -60,7 +54,6 @@ class BasicMap(KindMapClass):
 
 @dataclass
 class BananaMap(KindMapClass):
-    name: str
     ins: tuple = (3, 2)
     outs: tuple = (3, 2)
     vban: tuple = (8, 8, 1, 1)
@@ -70,7 +63,6 @@ class BananaMap(KindMapClass):
 
 @dataclass
 class PotatoMap(KindMapClass):
-    name: str
     ins: tuple = (5, 3)
     outs: tuple = (5, 3)
     vban: tuple = (8, 8, 1, 1)

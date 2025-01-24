@@ -2,6 +2,7 @@ import ctypes as ct
 
 from logHandler import log
 
+from . import config
 from .binds import Binds
 from .cdll import BITS
 from .context import Context, StripStrategy
@@ -11,6 +12,7 @@ from .kinds import KindId
 class Controller(Binds):
     def __init__(self):
         self.ctx = Context(StripStrategy(self, 0))
+        self.bits = config.get('bits', BITS)
 
     def login(self):
         retval = self.call(self.bind_login, ok=(0, 1))
@@ -40,8 +42,8 @@ class Controller(Binds):
 
     def run_voicemeeter(self, kind_id):
         val = kind_id.value
-        if val == 3 and BITS == 64:
-            val = 6
+        if self.bits == 64:
+            val += 3
         self.call(self.bind_run_voicemeeter, val)
 
     def __clear(self):

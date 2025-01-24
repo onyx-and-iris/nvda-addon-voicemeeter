@@ -43,7 +43,4 @@ dll_path = vm_parent.joinpath(DLL_NAME)
 if not dll_path.is_file():
     raise VMError(f'Could not find {dll_path}')
 
-if BITS == 64:
-    libc = ct.CDLL(str(dll_path))
-else:
-    libc = ct.WinDLL(str(dll_path))
+libc = ct.WinDLL(str(dll_path))
