@@ -85,6 +85,7 @@ example:
 ```json
 {
   "voicemeeter": "banana",
+  "bits": 64,
   "keybinds": {
     "NVDA+alt+k": "strip_mode",
     "NVDA+alt+l": "bus_mode",
@@ -120,6 +121,7 @@ example:
 Would make the following changes:
 
 - load the plugin in `banana` mode (default is potato)
+- override the bits of Voicemeeter GUI to 64 (default is 32)
 - change the `strip_mode` and `bus_mode` binds to `NVDA+alt+k` and `NVDA+alt+l` respectively
 - change the `announce_voicemeeter_version` bind to `NVDA+shift+z`
 - changes the bus assignment binds to `NVDA+control+number`
