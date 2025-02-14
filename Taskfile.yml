@@ -11,7 +11,7 @@ tasks:
     desc: Copy sources files to scratchpad directory
     platforms: [windows]
     cmds:
-      - "{{.SHELL}} -Command 'robocopy {{.SOURCE}} {{.DEST}} /NDL'"
+      - "{{.SHELL}} -Command 'robocopy {{.SOURCE}} {{.DEST}} /XD {{.IGNORE}} /NDL'"
     ignore_error: true
 
   build:
