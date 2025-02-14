@@ -20,8 +20,8 @@ build = [
 distribution = false
 
 [tool.pdm.scripts]
-copy = "pwsh build.ps1"
-build = "pwsh build.ps1 -build"
+copy = "task copy"
+build = "task build"
 
 [tool.ruff]
 exclude = [
