@@ -2,16 +2,21 @@ version: '3'
 
 vars:
   SHELL: pwsh
-  SOURCE: addon\globalPlugins\voicemeeter
-  DEST: ${env:appdata}\nvda\scratchpad\globalPlugins\voicemeeter\
-  IGNORE: ${env:appdata}\nvda\scratchpad\globalPlugins\voicemeeter\__pycache__\
 
 tasks:
+  default:
+    desc: Build the addon
+    cmds:
+      - task: build
+
   copy:
     desc: Copy sources files to scratchpad directory
     platforms: [windows]
+    vars:
+      SOURCE: addon\globalPlugins\voicemeeter
+      DEST: ${env:appdata}\nvda\scratchpad\globalPlugins\voicemeeter\
     cmds:
-      - "{{.SHELL}} -Command 'robocopy {{.SOURCE}} {{.DEST}} /XD {{.IGNORE}} /NDL'"
+      - "{{.SHELL}} -Command 'robocopy {{.SOURCE}} {{.DEST}} /NDL'"
     ignore_error: true
 
   build:

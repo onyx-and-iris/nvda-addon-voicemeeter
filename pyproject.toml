@@ -21,7 +21,7 @@ distribution = false
 
 [tool.pdm.scripts]
 copy = "task copy"
-build = "task build"
+release = "task build"
 
 [tool.ruff]
 exclude = [
