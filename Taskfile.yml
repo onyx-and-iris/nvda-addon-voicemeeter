@@ -18,4 +18,4 @@ tasks:
     desc: Build the addon
     platforms: [windows]
     cmds:
-      - '{{.SHELL}} -Command "scons"'
+      - '{{.SHELL}} -Command "pdm run scons"'
