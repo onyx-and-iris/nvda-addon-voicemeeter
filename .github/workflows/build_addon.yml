@@ -2,7 +2,8 @@ name: Build Addon
 
 on:
   push:
-    tags: ["*"]
+    tags:
+      - 'v*.*.*'
 
   pull_request:
     branches: [ main, master ]
