@@ -1,6 +1,6 @@
 [project]
 name = "nvda-addon-voicemeeter"
-version = "1.1.1"
+version = "1.2.0"
 description = "A GUI-less NVDA Addon for Voicemeeter using the Remote API"
 authors = [{ name = "Onyx and Iris", email = "code@onyxandiris.online" }]
 dependencies = []
