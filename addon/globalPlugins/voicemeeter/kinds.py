@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum, unique
 
-from .error import VMError
+from .error import VMAddonError
 
 
 @unique
@@ -78,7 +78,8 @@ def kind_factory(kind_id):
     elif kind_id == 'potato':
         _kind_map = PotatoMap
     else:
-        raise ValueError(f'Unknown Voicemeeter kind {kind_id}')
+        ERR_MSG = f'Unknown Voicemeeter kind {kind_id}'
+        raise ValueError(ERR_MSG)
     return _kind_map(name=kind_id)
 
 
@@ -87,5 +88,5 @@ def request_kind_map(kind_id):
     try:
         KIND_obj = kind_factory(kind_id)
     except ValueError as e:
-        raise VMError(str(e)) from e
+        raise VMAddonError(str(e)) from e
     return KIND_obj

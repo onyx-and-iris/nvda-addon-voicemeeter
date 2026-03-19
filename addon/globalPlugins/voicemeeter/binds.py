@@ -2,7 +2,7 @@ import ctypes as ct
 from ctypes.wintypes import CHAR, FLOAT, LONG
 
 from .cdll import libc
-from .error import VMCAPIError
+from .error import VMAddonCAPIError
 
 
 class Binds:
@@ -41,5 +41,5 @@ class Binds:
     def call(self, fn, *args, ok=(0,)):
         retval = fn(*args)
         if retval not in ok:
-            raise VMCAPIError(fn.__name__, retval)
+            raise VMAddonCAPIError(fn.__name__, retval)
         return retval

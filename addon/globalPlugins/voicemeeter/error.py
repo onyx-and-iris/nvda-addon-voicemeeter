@@ -1,9 +1,9 @@
-class VMError(Exception):
-    """Base voicemeeterlib exception class"""
+class VMAddonError(Exception):
+    """Base voicemeeter add-on exception class"""
 
 
-class VMCAPIError(VMError):
-    """Exception raised when the C-API returns an error code"""
+class VMAddonCAPIError(VMAddonError):
+    """Exception raised when the Voicemeeter C-API returns an error code"""
 
     def __init__(self, fn_name, code):
         self.fn_name = fn_name
