@@ -9,30 +9,31 @@ from .context import Context, StripStrategy
 from .kinds import KindId
 
 
-class Controller(Binds):
+class Controller:
     def __init__(self):
+        self._binds = Binds()
         self.ctx = Context(StripStrategy(self, 0))
         self.bits = config.get('bits', BITS)
 
     def login(self):
-        retval = self.call(self.bind_login, ok=(0, 1))
+        retval = self._binds.login()
         log.info('INFO - logged into Voicemeeter Remote API')
         return retval
 
     def logout(self):
-        self.call(self.bind_logout)
+        self._binds.logout()
         log.info('NFO - logged out of Voicemeeter Remote API')
 
     @property
     def kind_id(self):
         c_type = ct.c_long()
-        self.call(self.bind_get_voicemeeter_type, ct.byref(c_type))
+        self._binds.get_voicemeeter_type(c_type)
         return KindId(c_type.value).name.lower()
 
     @property
     def version(self):
         ver = ct.c_long()
-        self.call(self.bind_get_voicemeeter_version, ct.byref(ver))
+        self._binds.get_voicemeeter_version(ver)
         return '{}.{}.{}.{}'.format(
             (ver.value & 0xFF000000) >> 24,
             (ver.value & 0x00FF0000) >> 16,
@@ -44,17 +45,17 @@ class Controller(Binds):
         val = kind_id.value
         if self.bits == 64:
             val += 3
-        self.call(self.bind_run_voicemeeter, val)
+        self._binds.run_voicemeeter(val)
 
     def __clear(self):
-        while self.call(self.bind_is_parameters_dirty, ok=(0, 1)) == 1:
+        while self._binds.is_parameters_dirty() == 1:
             pass
 
-    def _get(self, param):
+    def get(self, param):
         self.__clear()
         buf = ct.c_float()
-        self.call(self.bind_get_parameter_float, param.encode(), ct.byref(buf))
+        self._binds.get_parameter_float(param.encode(), buf)
         return buf.value
 
-    def _set(self, param, val):
-        self.call(self.bind_set_parameter_float, param.encode(), ct.c_float(float(val)))
+    def set(self, param, val):
+        self._binds.set_parameter_float(param.encode(), ct.c_float(float(val)))

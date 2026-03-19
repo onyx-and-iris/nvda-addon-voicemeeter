@@ -38,8 +38,32 @@ class Binds:
     bind_set_parameter_float.restype = LONG
     bind_set_parameter_float.argtypes = [ct.POINTER(CHAR), FLOAT]
 
-    def call(self, fn, *args, ok=(0,)):
+    def _call(self, fn, *args, ok=(0,)):
         retval = fn(*args)
         if retval not in ok:
             raise VMAddonCAPIError(fn.__name__, retval)
         return retval
+
+    def login(self):
+        return self._call(self.bind_login)
+
+    def logout(self):
+        return self._call(self.bind_logout)
+
+    def run_voicemeeter(self, kind_val):
+        return self._call(self.bind_run_voicemeeter, kind_val)
+
+    def get_voicemeeter_type(self, c_type):
+        return self._call(self.bind_get_voicemeeter_type, ct.byref(c_type))
+
+    def get_voicemeeter_version(self, ver):
+        return self._call(self.bind_get_voicemeeter_version, ct.byref(ver))
+
+    def is_parameters_dirty(self):
+        return self._call(self.bind_is_parameters_dirty, ok=(0, 1))
+
+    def get_parameter_float(self, param, buf):
+        return self._call(self.bind_get_parameter_float, param, ct.byref(buf))
+
+    def set_parameter_float(self, param, val):
+        return self._call(self.bind_set_parameter_float, param, val)
