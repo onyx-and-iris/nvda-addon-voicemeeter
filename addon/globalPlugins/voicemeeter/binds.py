@@ -45,7 +45,7 @@ class Binds:
         return retval
 
     def login(self):
-        return self._call(self.bind_login)
+        return self._call(self.bind_login, ok=(0, 1))
 
     def logout(self):
         return self._call(self.bind_logout)
