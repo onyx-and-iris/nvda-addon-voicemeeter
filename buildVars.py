@@ -28,7 +28,7 @@ addon_info = {
 The add-on requires Voicemeeter to be installed."""
     ),
     # version
-    'addon_version': '1.2.0',
+    'addon_version': '1.2.1',
     # Author(s)
     'addon_author': 'onyx-and-iris <code@onyxandiris.online>',
     # URL for the add-on documentation support
