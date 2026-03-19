@@ -5,9 +5,6 @@ on:
     tags:
       - 'v*.*.*'
 
-  pull_request:
-    branches: [ main, master ]
-
   workflow_dispatch:
 
 jobs:
@@ -22,7 +19,7 @@ jobs:
         uses: pdm-project/setup-pdm@v4
         with:
           python-version: '3.11'
-  
+
       - name: Install dependencies
         run: |
           pdm sync -d -G build
@@ -43,17 +40,17 @@ jobs:
     needs: build
 
     steps:
-    - name: Download releases files
-      uses: actions/download-artifact@v4.1.7
-      with:
-        name: packaged_addon
+      - name: Download releases files
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: packaged_addon
 
-    - name: Display structure of downloaded files
-      run: tree
+      - name: Display structure of downloaded files
+        run: tree
 
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: ./*.nvda-addon
-        fail_on_unmatched_files: true
-        prerelease: ${{ contains(github.ref, '-') }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.nvda-addon
+          fail_on_unmatched_files: true
+          prerelease: ${{ contains(github.ref, '-') }}
