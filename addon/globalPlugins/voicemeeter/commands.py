@@ -56,14 +56,27 @@ class CommandsMixin:
     def script_audibility_mode(self, _):
         self.__set_slider_mode('audibility')
 
+    # Mono is a special case because the parameter is a boolean for strips and an int for buses
+
+    def script_rotate_mono(self, _):
+        if isinstance(self.controller.ctx.strategy, context.StripStrategy):
+            val = not self.controller.ctx.get_bool('mono')
+            self.controller.ctx.set_bool('mono', val)
+            ui.message('on' if val else 'off')
+        else:
+            opts = ['off', 'on', 'stereo reverse']
+            val = self.controller.ctx.get_int('mono')
+            new_val = (val + 1) % len(opts)
+            self.controller.ctx.set_int('mono', new_val)
+            ui.message(opts[new_val])
+
     ### BOOLEAN PARAMETERS ###
 
-    def script_toggle_mono(self, _):
-        val = not self.controller.ctx.get_bool('mono')
-        self.controller.ctx.set_bool('mono', val)
-        ui.message('on' if val else 'off')
-
     def script_toggle_solo(self, _):
+        if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
+            ui.message('Solo only available for strips')
+            return
+
         val = not self.controller.ctx.get_bool('solo')
         self.controller.ctx.set_bool('solo', val)
         ui.message('on' if val else 'off')
@@ -74,19 +87,50 @@ class CommandsMixin:
         ui.message('on' if val else 'off')
 
     def script_toggle_mc(self, _):
+        if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
+            ui.message('MC only available for strips')
+            return
+
+        valid_indices = [self.kind.phys_in + 1]
+        match self.kind.name:
+            case 'potato':
+                valid_indices.append(self.kind.phys_in + self.kind.virt_in)
+
+        if self.controller.ctx.index + 1 not in valid_indices:
+            if len(valid_indices) == 1:
+                ui.message(f'MC only available for strip {valid_indices[0]} for Voicemeeter {self.kind}')
+            else:
+                ui.message(
+                    f'MC only available for strips {valid_indices[0]} and {valid_indices[1]} for Voicemeeter {self.kind}'
+                )
+            return
+
         val = not self.controller.ctx.get_bool('mc')
         self.controller.ctx.set_bool('mc', val)
         ui.message('on' if val else 'off')
 
     def script_karaoke(self, _):
+        if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
+            ui.message('Karaoke mode only available for strips')
+            return
+
+        valid_index = self.kind.phys_in + self.kind.virt_in - 1
+        # controller index is 0 based and the gesture display is 1 based, so subtract 1 from valid_index
+        if self.controller.ctx.index != valid_index - 1:
+            ui.message(f'Karaoke mode only available for strip {valid_index} for Voicemeeter {self.kind}')
+            return
+
         opts = ['off', 'k m', 'k 1', 'k 2', 'k v']
-        val = self.controller.ctx.get_int('karaoke') + 1
-        if val == len(opts):
-            val = 0
-        self.controller.ctx.set_int('karaoke', val)
-        ui.message(opts[val])
+        val = self.controller.ctx.get_int('karaoke')
+        new_val = (val + 1) % len(opts)
+        self.controller.ctx.set_int('karaoke', new_val)
+        ui.message(opts[new_val])
 
     def script_bus_assignment(self, gesture):
+        if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
+            ui.message('Bus assignment only available for strips')
+            return
+
         proposed = int(gesture.displayName[-1])
         if proposed - 1 < self.kind.phys_out:
             output = f'A{proposed}'

@@ -28,22 +28,22 @@ class Strategy(ABC):
         self._slider_mode = val
 
     def get_bool(self, param: str) -> bool:
-        return self._controller._get(f'{self.identifier}.{param}') == 1
+        return self._controller.get(f'{self.identifier}.{param}') == 1
 
     def set_bool(self, param: str, val: bool):
-        self._controller._set(f'{self.identifier}.{param}', 1 if val else 0)
+        self._controller.set(f'{self.identifier}.{param}', 1 if val else 0)
 
     def get_float(self, param: str) -> float:
-        return round(self._controller._get(f'{self.identifier}.{param}'), 1)
+        return round(self._controller.get(f'{self.identifier}.{param}'), 1)
 
     def set_float(self, param: str, val: float):
-        self._controller._set(f'{self.identifier}.{param}', val)
+        self._controller.set(f'{self.identifier}.{param}', val)
 
     def get_int(self, param: str) -> int:
-        return int(self._controller._get(f'{self.identifier}.{param}'))
+        return int(self._controller.get(f'{self.identifier}.{param}'))
 
     def set_int(self, param: str, val: int):
-        self._controller._set(f'{self.identifier}.{param}', val)
+        self._controller.set(f'{self.identifier}.{param}', val)
 
 
 class StripStrategy(Strategy):

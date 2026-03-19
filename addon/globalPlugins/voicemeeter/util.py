@@ -26,7 +26,7 @@ def _make_gestures(kind_id):
         'kb:NVDA+alt+a': 'audibility_mode',
         'kb:NVDA+shift+q': 'announce_controller',
         'kb:NVDA+shift+v': 'announce_voicemeeter_version',
-        'kb:NVDA+shift+o': 'toggle_mono',
+        'kb:NVDA+shift+o': 'rotate_mono',
         'kb:NVDA+shift+s': 'toggle_solo',
         'kb:NVDA+shift+m': 'toggle_mute',
         'kb:NVDA+shift+c': 'toggle_mc',
