@@ -24,3 +24,18 @@ tasks:
     platforms: [windows]
     cmds:
       - '{{.SHELL}} -Command "pdm run scons"'
+
+  bump:
+    desc: Bump the version number
+    preconditions:
+      - sh: '{{.SHELL}} -c "if (Get-Command bump) { exit 0 } else { exit 1 }"'
+        msg: "The 'bump' command is not available. Run `go install github.com/onyx-and-iris/bump/cmd/bump@latest`."
+    cmds:
+      - |
+        {{if eq .CLI_ARGS "show"}}
+          {{.SHELL}} -c "bump show -f buildVars.py -p \"'addon_version': '(\d+\.\d+\.\d+)'\""
+          {{.SHELL}} -c "bump show -f pyproject.toml -p \"version = .(\d+\.\d+\.\d+).\""
+        {{else}}
+          {{.SHELL}} -c "bump {{.CLI_ARGS}} -w -f buildVars.py -p \"'addon_version': '(\d+\.\d+\.\d+)'\""
+          {{.SHELL}} -c "bump {{.CLI_ARGS}} -w -f pyproject.toml -p \"version = .(\d+\.\d+\.\d+).\""
+        {{end}}
