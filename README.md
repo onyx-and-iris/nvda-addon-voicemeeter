@@ -15,27 +15,27 @@ This addon can be installed through the Add-on store, `Install from external sou
 
 ## Default Keybinds
 
-### Controllers
+### Channel Controllers
 
-- `NVDA+alt+s`: Enable strip mode
-- `NVDA+alt+b`: Enable bus mode.
+- `NVDA+alt+s`: Enable strip controller
+- `NVDA+alt+b`: Enable bus controller.
 
-- `NVDA+alt+1`: Enable controller for channel 1 (strip|bus)
-- `NVDA+alt+2`: Enable controller for channel 2 (strip|bus)
-- `NVDA+alt+3`: Enable controller for channel 3 (strip|bus)
-- `NVDA+alt+4`: Enable controller for channel 4 (strip|bus)
-- `NVDA+alt+5`: Enable controller for channel 5 (strip|bus)
-- `NVDA+alt+6`: Enable controller for channel 6 (strip|bus)
-- `NVDA+alt+7`: Enable controller for channel 7 (strip|bus)
-- `NVDA+alt+8`: Enable controller for channel 8 (strip|bus)
+- `NVDA+alt+1`: Enable controller index 1 (strip|bus)
+- `NVDA+alt+2`: Enable controller index 2 (strip|bus)
+- `NVDA+alt+3`: Enable controller index 3 (strip|bus)
+- `NVDA+alt+4`: Enable controller index 4 (strip|bus)
+- `NVDA+alt+5`: Enable controller index 5 (strip|bus)
+- `NVDA+alt+6`: Enable controller index 6 (strip|bus)
+- `NVDA+alt+7`: Enable controller index 7 (strip|bus)
+- `NVDA+alt+8`: Enable controller index 8 (strip|bus)
 
-### Slider Modes
+### Slider Controllers
 
-- `NVDA+alt+g`: Enable gain slider mode.
-- `NVDA+alt+c`: Enable comp slider mode.
-- `NVDA+alt+t`: Enable gate slider mode.
-- `NVDA+alt+d`: Enable denoiser slider mode.
-- `NVDA+alt+a`: Enable audibility slider mode.
+- `NVDA+alt+g`: Enable gain slider controller.
+- `NVDA+alt+c`: Enable comp slider controller.
+- `NVDA+alt+t`: Enable gate slider controller.
+- `NVDA+alt+d`: Enable denoiser slider controller.
+- `NVDA+alt+a`: Enable audibility slider controller.
 
 ### Sliders
 
@@ -53,22 +53,24 @@ This addon can be installed through the Add-on store, `Install from external sou
 - `NVDA+shift+m`: Mute
 - `NVDA+shift+c`: MC
 - `NVDA+shift+k`: Karaoke
+- `NVDA+shift+n`: Next Bus Mode
+- `NVDA+shift+p`: Previous Bus Mode
 
 ### Bus Assignments (A1-A5|B1-B3)
 
-- `NVDA+shift+1`: Toggle BUS assignment 1 for a strip
-- `NVDA+shift+2`: Toggle BUS assignment 2 for a strip
-- `NVDA+shift+3`: Toggle BUS assignment 3 for a strip
-- `NVDA+shift+4`: Toggle BUS assignment 4 for a strip
-- `NVDA+shift+5`: Toggle BUS assignment 5 for a strip
-- `NVDA+shift+6`: Toggle BUS assignment 6 for a strip
-- `NVDA+shift+7`: Toggle BUS assignment 7 for a strip
-- `NVDA+shift+8`: Toggle BUS assignment 8 for a strip
+- `NVDA+shift+1`: Toggle BUS assignment 1
+- `NVDA+shift+2`: Toggle BUS assignment 2
+- `NVDA+shift+3`: Toggle BUS assignment 3
+- `NVDA+shift+4`: Toggle BUS assignment 4
+- `NVDA+shift+5`: Toggle BUS assignment 5
+- `NVDA+shift+6`: Toggle BUS assignment 6
+- `NVDA+shift+7`: Toggle BUS assignment 7
+- `NVDA+shift+8`: Toggle BUS assignment 8
 
 ### Announcements
 
 - `NVDA+shift+q`: Announce current controller.
-- `NVDA+shift+a`: Announce Voicemeeter kind.
+- `NVDA+shift+a`: Announce Voicemeeter kind and version.
 
 ## Configuration
 
@@ -96,10 +98,13 @@ example:
     "NVDA+alt+a": "audibility_mode",
     "NVDA+shift+q": "announce_controller",
     "NVDA+shift+z": "announce_voicemeeter_version",
+    "NVDA+shift+o": "rotate_mono",
     "NVDA+shift+s": "toggle_solo",
     "NVDA+shift+m": "toggle_mute",
     "NVDA+shift+c": "toggle_mc",
-    "NVDA+shift+k": "karaoke",
+    "NVDA+shift+k": "rotate_karaoke",
+    "NVDA+shift+n": "rotate_bus_mode_next",
+    "NVDA+shift+p": "rotate_bus_mode_previous",
     "NVDA+shift+upArrow": "slider_increase_by_point_one",
     "NVDA+shift+downArrow": "slider_decrease_by_point_one",
     "NVDA+shift+alt+upArrow": "slider_increase_by_one",
