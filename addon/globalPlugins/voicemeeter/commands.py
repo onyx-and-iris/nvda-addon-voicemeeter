@@ -91,17 +91,18 @@ class CommandsMixin:
             ui.message('MC only available for strips')
             return
 
-        valid_indices = [self.kind.phys_in + 1]
+        valid_indices_zero_based = [self.kind.phys_in]
         match self.kind.name:
             case 'potato':
-                valid_indices.append(self.kind.phys_in + self.kind.virt_in)
+                valid_indices_zero_based.append(self.kind.phys_in + self.kind.virt_in - 1)
 
-        if self.controller.ctx.index + 1 not in valid_indices:
-            if len(valid_indices) == 1:
-                ui.message(f'MC only available for strip {valid_indices[0]} for Voicemeeter {self.kind}')
+        if self.controller.ctx.index not in valid_indices_zero_based:
+            valid_indices_display = [i + 1 for i in valid_indices_zero_based]
+            if len(valid_indices_display) == 1:
+                ui.message(f'MC only available for strip {valid_indices_display[0]} for Voicemeeter {self.kind}')
             else:
                 ui.message(
-                    f'MC only available for strips {valid_indices[0]} and {valid_indices[1]} for Voicemeeter {self.kind}'
+                    f'MC only available for strips {valid_indices_display[0]} and {valid_indices_display[1]} for Voicemeeter {self.kind}'
                 )
             return
 
@@ -114,10 +115,21 @@ class CommandsMixin:
             ui.message('Karaoke mode only available for strips')
             return
 
-        valid_index = self.kind.phys_in + self.kind.virt_in - 1
-        # controller index is 0 based and the gesture display is 1 based, so subtract 1 from valid_index
-        if self.controller.ctx.index != valid_index - 1:
-            ui.message(f'Karaoke mode only available for strip {valid_index} for Voicemeeter {self.kind}')
+        if self.kind.name not in ['banana', 'potato']:
+            ui.message(f'Karaoke mode not available for Voicemeeter {self.kind}')
+            return
+
+        valid_index_zero_based = None
+        match self.kind.name:
+            case 'banana':
+                valid_index_zero_based = self.kind.phys_in + self.kind.virt_in - 1
+            case 'potato':
+                valid_index_zero_based = self.kind.phys_in + self.kind.virt_in - 2
+
+        if self.controller.ctx.index != valid_index_zero_based:
+            ui.message(
+                f'Karaoke mode only available for strip {valid_index_zero_based + 1} for Voicemeeter {self.kind}'
+            )
             return
 
         opts = ['off', 'k m', 'k 1', 'k 2', 'k v']
