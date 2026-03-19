@@ -1,7 +1,7 @@
 import ui
 from logHandler import log
 
-from . import context
+from . import context, util
 
 
 class CommandsMixin:
@@ -56,7 +56,7 @@ class CommandsMixin:
     def script_audibility_mode(self, _):
         self.__set_slider_mode('audibility')
 
-    # Mono is a special case because the parameter is a boolean for strips and an int for buses
+    ### STRIP|BUS PARAMETERS ###
 
     def script_rotate_mono(self, _):
         if isinstance(self.controller.ctx.strategy, context.StripStrategy):
@@ -70,7 +70,12 @@ class CommandsMixin:
             self.controller.ctx.set_int('mono', new_val)
             ui.message(opts[new_val])
 
-    ### BOOLEAN PARAMETERS ###
+    def script_toggle_mute(self, _):
+        val = not self.controller.ctx.get_bool('mute')
+        self.controller.ctx.set_bool('mute', val)
+        ui.message('on' if val else 'off')
+
+    ### STRIP PARAMETERS ###
 
     def script_toggle_solo(self, _):
         if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
@@ -79,11 +84,6 @@ class CommandsMixin:
 
         val = not self.controller.ctx.get_bool('solo')
         self.controller.ctx.set_bool('solo', val)
-        ui.message('on' if val else 'off')
-
-    def script_toggle_mute(self, _):
-        val = not self.controller.ctx.get_bool('mute')
-        self.controller.ctx.set_bool('mute', val)
         ui.message('on' if val else 'off')
 
     def script_toggle_mc(self, _):
@@ -110,7 +110,7 @@ class CommandsMixin:
         self.controller.ctx.set_bool('mc', val)
         ui.message('on' if val else 'off')
 
-    def script_karaoke(self, _):
+    def script_rotate_karaoke(self, _):
         if not isinstance(self.controller.ctx.strategy, context.StripStrategy):
             ui.message('Karaoke mode only available for strips')
             return
@@ -152,34 +152,76 @@ class CommandsMixin:
         self.controller.ctx.set_bool(output, val)
         ui.message('on' if val else 'off')
 
+    ### BUS PARAMETERS ###
+
+    def script_rotate_bus_mode_next(self, _):
+        if not isinstance(self.controller.ctx.strategy, context.BusStrategy):
+            ui.message('Bus mode only available for buses')
+            return
+
+        opts = util._get_bus_mode_opts(self.kind.name)
+        for mode in opts:
+            if self.controller.ctx.get_bool(f'mode.{mode}'):
+                current_mode = mode
+                log.info(f'INFO - bus {self.controller.ctx.index} current mode {current_mode}')
+                break
+        else:
+            log.warning(f'WARNING - no bus mode found for bus {self.controller.ctx.index}')
+            return
+
+        new_val = (opts.index(current_mode) + 1) % len(opts)
+        log.info(f'INFO - bus {self.controller.ctx.index} mode {opts[new_val]}')
+        self.controller.ctx.set_bool(f'mode.{opts[new_val]}', True)
+        ui.message(util._get_bus_mode_readable_name(opts[new_val]))
+
+    def script_rotate_bus_mode_previous(self, _):
+        if not isinstance(self.controller.ctx.strategy, context.BusStrategy):
+            ui.message('Bus mode only available for buses')
+            return
+
+        opts = util._get_bus_mode_opts(self.kind.name)
+        for mode in opts:
+            if self.controller.ctx.get_bool(f'mode.{mode}'):
+                current_mode = mode
+                log.info(f'INFO - bus {self.controller.ctx.index} current mode {current_mode}')
+                break
+        else:
+            log.warning(f'WARNING - no bus mode found for bus {self.controller.ctx.index}')
+            return
+
+        new_val = (opts.index(current_mode) - 1) % len(opts)
+        log.info(f'INFO - bus {self.controller.ctx.index} mode {opts[new_val]}')
+        self.controller.ctx.set_bool(f'mode.{opts[new_val]}', True)
+        ui.message(util._get_bus_mode_readable_name(opts[new_val]))
+
     ### CONTROL SLIDERS ###
 
-    def script_slider_increase_by_point_one(self, gesture):
+    def script_slider_increase_by_point_one(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 0.1
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_decrease_by_point_one(self, gesture):
+    def script_slider_decrease_by_point_one(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 0.1
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_increase_by_one(self, gesture):
+    def script_slider_increase_by_one(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 1
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_decrease_by_one(self, gesture):
+    def script_slider_decrease_by_one(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 1
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_increase_by_three(self, gesture):
+    def script_slider_increase_by_three(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) + 3
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))
 
-    def script_slider_decrease_by_three(self, gesture):
+    def script_slider_decrease_by_three(self, _):
         val = self.controller.ctx.get_float(self.controller.ctx.slider_mode) - 3
         self.controller.ctx.set_float(self.controller.ctx.slider_mode, val)
         ui.message(str(round(val, 1)))

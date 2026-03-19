@@ -30,7 +30,9 @@ def _make_gestures(kind_id):
         'kb:NVDA+shift+s': 'toggle_solo',
         'kb:NVDA+shift+m': 'toggle_mute',
         'kb:NVDA+shift+c': 'toggle_mc',
-        'kb:NVDA+shift+k': 'karaoke',
+        'kb:NVDA+shift+k': 'rotate_karaoke',
+        'kb:NVDA+shift+n': 'rotate_bus_mode_next',
+        'kb:NVDA+shift+p': 'rotate_bus_mode_previous',
         'kb:NVDA+shift+upArrow': 'slider_increase_by_point_one',
         'kb:NVDA+shift+downArrow': 'slider_decrease_by_point_one',
         'kb:NVDA+shift+alt+upArrow': 'slider_increase_by_one',
@@ -49,3 +51,47 @@ def _make_gestures(kind_id):
         defaults = {k: v for k, v in defaults.items() if v not in matching_values}
         return {**defaults, **overrides}
     return defaults
+
+
+_bus_mode_map = {
+    'normal': 'Normal',
+    'amix': 'Mix Down A',
+    'bmix': 'Mix Down B',
+    'repeat': 'Stereo Repeat',
+    'composite': 'Composite',
+    'tvmix': 'Up Mix TV',
+    'upmix21': 'Up Mix 2.1',
+    'upmix41': 'Up Mix 4.1',
+    'upmix61': 'Up Mix 6.1',
+    'centeronly': 'Center Only',
+    'lfeonly': 'Low Frequency Effect Only',
+    'rearonly': 'Rear Only',
+}
+
+
+def _get_bus_mode_opts(kind_id):
+    if kind_id == 'basic':
+        return [
+            'normal',
+            'amix',
+            'repeat',
+            'composite',
+        ]
+    return [
+        'normal',
+        'amix',
+        'bmix',
+        'repeat',
+        'composite',
+        'tvmix',
+        'upmix21',
+        'upmix41',
+        'upmix61',
+        'centeronly',
+        'lfeonly',
+        'rearonly',
+    ]
+
+
+def _get_bus_mode_readable_name(mode):
+    return _bus_mode_map.get(mode, mode)

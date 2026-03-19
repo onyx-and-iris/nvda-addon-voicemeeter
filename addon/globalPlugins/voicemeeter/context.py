@@ -92,20 +92,6 @@ class Context:
     def slider_mode(self, val):
         self._strategy._slider_mode = val
 
-    def get_bool(self, *args) -> bool:
-        return self._strategy.get_bool(*args)
-
-    def set_bool(self, *args):
-        self._strategy.set_bool(*args)
-
-    def get_float(self, *args) -> float:
-        return self._strategy.get_float(*args)
-
-    def set_float(self, *args):
-        self._strategy.set_float(*args)
-
-    def get_int(self, *args) -> int:
-        return self._strategy.get_int(*args)
-
-    def set_int(self, *args):
-        self._strategy.set_int(*args)
+    def __getattr__(self, name):
+        """Delegate method calls to the strategy object."""
+        return getattr(self._strategy, name)
